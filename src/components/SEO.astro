@@ -1,0 +1,125 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  publishedAt?: Date;
+  updatedAt?: Date;
+  author?: string;
+  // Schema.org structured data
+  schema?: {
+    type: 'Review' | 'FAQPage' | 'HowTo' | 'Article' | 'WebPage';
+    data?: Record<string, unknown>;
+  };
+}
+
+const {
+  title,
+  description,
+  canonical = Astro.url.href,
+  ogImage = '/og-default.png',
+  ogType = 'website',
+  publishedAt,
+  updatedAt,
+  author = 'PickStack Team',
+  schema,
+} = Astro.props;
+
+const siteName = 'PickStack.ai';
+const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
+
+// Build JSON-LD schema
+function buildSchema() {
+  const baseSchema = {
+    '@context': 'https://schema.org',
+    '@type': schema?.type || 'WebPage',
+    name: title,
+    description,
+    url: canonical,
+    publisher: {
+      '@type': 'Organization',
+      name: siteName,
+      url: 'https://pickstack.ai',
+    },
+  };
+
+  if (schema?.type === 'Review' && schema.data) {
+    return {
+      ...baseSchema,
+      '@type': 'Review',
+      itemReviewed: schema.data.itemReviewed,
+      reviewRating: schema.data.reviewRating,
+      author: {
+        '@type': 'Person',
+        name: author,
+      },
+      ...schema.data,
+    };
+  }
+
+  if (schema?.type === 'FAQPage' && schema.data?.questions) {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: (schema.data.questions as Array<{question: string; answer: string}>).map((q) => ({
+        '@type': 'Question',
+        name: q.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: q.answer,
+        },
+      })),
+    };
+  }
+
+  if (schema?.type === 'Article') {
+    return {
+      ...baseSchema,
+      '@type': 'Article',
+      headline: title,
+      author: {
+        '@type': 'Person',
+        name: author,
+      },
+      datePublished: publishedAt?.toISOString(),
+      dateModified: (updatedAt || publishedAt)?.toISOString(),
+      ...schema.data,
+    };
+  }
+
+  return baseSchema;
+}
+
+const jsonLd = JSON.stringify(buildSchema());
+---
+
+<!-- Primary Meta Tags -->
+<title>{fullTitle}</title>
+<meta name="title" content={fullTitle} />
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:site_name" content={siteName} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonical} />
+<meta property="twitter:title" content={fullTitle} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={ogImage} />
+
+<!-- Article metadata -->
+{publishedAt && <meta property="article:published_time" content={publishedAt.toISOString()} />}
+{updatedAt && <meta property="article:modified_time" content={updatedAt.toISOString()} />}
+{author && <meta name="author" content={author} />}
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json" set:html={jsonLd} />

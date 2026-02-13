@@ -1,0 +1,89 @@
+---
+const currentYear = new Date().getFullYear();
+
+const footerLinks = {
+  categories: [
+    { label: 'Property Management Software', href: '/property-management' },
+  ],
+  company: [
+    { label: 'About', href: '/about' },
+    { label: 'Methodology', href: '/methodology' },
+    { label: 'Contact', href: '/contact' },
+  ],
+  legal: [
+    { label: 'Privacy Policy', href: '/privacy' },
+    { label: 'Terms of Service', href: '/terms' },
+    { label: 'Affiliate Disclosure', href: '/affiliate-disclosure' },
+  ],
+};
+---
+
+<footer class="bg-slate-900 text-slate-400 mt-16">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <!-- Brand -->
+      <div class="md:col-span-1">
+        <a href="/" class="flex items-center gap-2 mb-4">
+          <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+            </svg>
+          </div>
+          <span class="font-bold text-xl text-white">PickStack<span class="text-blue-500">.ai</span></span>
+        </a>
+        <p class="text-sm">
+          Stack the right tools. Pick what fits.
+        </p>
+      </div>
+
+      <!-- Categories -->
+      <div>
+        <h3 class="font-semibold text-white mb-4">Categories</h3>
+        <ul class="space-y-2">
+          {footerLinks.categories.map((link) => (
+            <li>
+              <a href={link.href} class="text-sm hover:text-white transition-colors">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div>
+        <h3 class="font-semibold text-white mb-4">Company</h3>
+        <ul class="space-y-2">
+          {footerLinks.company.map((link) => (
+            <li>
+              <a href={link.href} class="text-sm hover:text-white transition-colors">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div>
+        <h3 class="font-semibold text-white mb-4">Legal</h3>
+        <ul class="space-y-2">
+          {footerLinks.legal.map((link) => (
+            <li>
+              <a href={link.href} class="text-sm hover:text-white transition-colors">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-slate-800 mt-8 pt-8 text-sm text-center">
+      <p>&copy; {currentYear} PickStack.ai. All rights reserved.</p>
+      <p class="mt-2 text-slate-500">
+        Some links on this site are affiliate links. We may earn a commission if you make a purchase.
+      </p>
+    </div>
+  </div>
+</footer>

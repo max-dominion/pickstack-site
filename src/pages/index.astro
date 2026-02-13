@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const categories = [
+  {
+    title: 'Property Management Software',
+    description: 'Compare the best property management tools for landlords and property managers.',
+    href: '/property-management',
+    icon: '🏠',
+    articles: [
+      'Best Property Management Software',
+      'Best Free Landlord Software',
+      'DoorLoop vs Buildium',
+    ],
+  },
+  // Future verticals will be added here
+];
+---
+
+<BaseLayout
+  title="PickStack.ai"
+  description="Stack the right tools. Pick what fits. Curated SaaS comparisons to help you choose the perfect software for your business."
+>
+  <!-- Hero -->
+  <section class="bg-gradient-to-b from-slate-50 to-white py-16 md:py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6">
+        Stack the right tools.<br />
+        <span class="text-blue-600">Pick what fits.</span>
+      </h1>
+      <p class="text-xl text-slate-600 max-w-2xl mx-auto mb-8">
+        Curated SaaS comparisons for specific business types. No fluff, no paid placements — just honest research to help you choose.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/property-management" class="btn-primary">
+          Explore Property Management Software
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+        <a href="/methodology" class="btn-secondary">
+          Our Methodology
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">Software Categories</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {categories.map((category) => (
+          <a href={category.href} class="card group">
+            <div class="text-4xl mb-4">{category.icon}</div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
+              {category.title}
+            </h3>
+            <p class="text-slate-600 mb-4">{category.description}</p>
+            <ul class="text-sm text-slate-500 space-y-1">
+              {category.articles.map((article) => (
+                <li class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  {article}
+                </li>
+              ))}
+            </ul>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="py-16 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">How We Pick</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">1</div>
+          <h3 class="font-bold text-lg mb-2">Research</h3>
+          <p class="text-slate-600">We test products, analyze features, read reviews, and compare pricing — so you don't have to.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">2</div>
+          <h3 class="font-bold text-lg mb-2">Compare</h3>
+          <p class="text-slate-600">Side-by-side comparisons focused on what matters for your specific use case and business type.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">3</div>
+          <h3 class="font-bold text-lg mb-2">Recommend</h3>
+          <p class="text-slate-600">Clear recommendations based on your needs — not who pays us the highest commission.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust signals -->
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-slate-900 mb-4">Why Trust PickStack?</h2>
+      <p class="text-slate-600 max-w-2xl mx-auto mb-8">
+        We're transparent about how we make money. Yes, we earn affiliate commissions — but our recommendations are based on merit, not payouts.
+      </p>
+      <a href="/methodology" class="text-blue-600 hover:text-blue-800 font-semibold">
+        Read our full methodology →
+      </a>
+    </div>
+  </section>
+</BaseLayout>

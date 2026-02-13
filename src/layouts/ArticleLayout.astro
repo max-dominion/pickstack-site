@@ -1,0 +1,94 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+
+type ArticleType = CollectionEntry<'reviews'> | CollectionEntry<'roundups'> | CollectionEntry<'comparisons'>;
+
+interface Props {
+  article: ArticleType;
+  type: 'review' | 'roundup' | 'comparison';
+}
+
+const { article, type } = Astro.props;
+const { data } = article;
+
+// Build schema based on article type
+function buildSchema() {
+  if (type === 'review') {
+    const reviewData = data as CollectionEntry<'reviews'>['data'];
+    return {
+      type: 'Review' as const,
+      data: {
+        itemReviewed: {
+          '@type': 'SoftwareApplication',
+          name: reviewData.product,
+          applicationCategory: reviewData.category,
+        },
+        reviewRating: {
+          '@type': 'Rating',
+          ratingValue: reviewData.rating,
+          bestRating: 5,
+          worstRating: 1,
+        },
+      },
+    };
+  }
+  return { type: 'Article' as const };
+}
+---
+
+<BaseLayout
+  title={data.title}
+  description={data.description}
+  ogType="article"
+  publishedAt={data.publishedAt}
+  updatedAt={'updatedAt' in data ? data.updatedAt : undefined}
+  author={data.author}
+  schema={buildSchema()}
+>
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Breadcrumb -->
+    <nav class="mb-6 text-sm">
+      <ol class="flex items-center gap-2 text-slate-500">
+        <li><a href="/" class="hover:text-slate-700">Home</a></li>
+        <li>/</li>
+        {'vertical' in data && (
+          <>
+            <li><a href={`/${data.vertical}`} class="hover:text-slate-700 capitalize">{data.vertical.replace('-', ' ')}</a></li>
+            <li>/</li>
+          </>
+        )}
+        <li class="text-slate-900 truncate">{data.title}</li>
+      </ol>
+    </nav>
+
+    <!-- Header -->
+    <header class="mb-8">
+      <h1 class="text-4xl font-bold text-slate-900 mb-4">{data.title}</h1>
+      <p class="text-xl text-slate-600 mb-4">{data.description}</p>
+      <div class="flex items-center gap-4 text-sm text-slate-500">
+        <span>By {data.author}</span>
+        <span>•</span>
+        <time datetime={data.publishedAt.toISOString()}>
+          {data.publishedAt.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+        </time>
+        {'updatedAt' in data && data.updatedAt && (
+          <>
+            <span>•</span>
+            <span>Updated {data.updatedAt.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+          </>
+        )}
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="prose">
+      <slot />
+    </div>
+
+    <!-- Affiliate disclosure -->
+    <aside class="mt-12 p-4 bg-slate-50 rounded-lg text-sm text-slate-600">
+      <strong>Disclosure:</strong> Some links in this article are affiliate links. If you click and make a purchase, we may earn a commission at no extra cost to you. This helps support our research and editorial work.
+    </aside>
+  </article>
+</BaseLayout>

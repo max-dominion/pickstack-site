@@ -1,0 +1,151 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Get content for this vertical (will be empty initially)
+const roundups = await getCollection('roundups', ({ data }) => data.vertical === 'property-management');
+const reviews = await getCollection('reviews', ({ data }) => data.category === 'property-management');
+const comparisons = await getCollection('comparisons', ({ data }) => data.vertical === 'property-management');
+
+const featuredContent = [
+  {
+    title: 'Best Property Management Software for Small Landlords 2026',
+    description: 'Our top picks for landlords managing 1-50 units. Comprehensive comparison of features, pricing, and ease of use.',
+    href: '/property-management/best-property-management-software',
+    type: 'Roundup',
+    badge: 'Featured',
+  },
+  {
+    title: 'Best Free Landlord Software 2026',
+    description: 'The best no-cost options for landlords who need basic property management without breaking the bank.',
+    href: '/property-management/best-free-landlord-software',
+    type: 'Roundup',
+  },
+  {
+    title: 'Best Rent Collection Apps 2026',
+    description: 'Compare the top apps for collecting rent online, with ACH, credit card, and automatic payment options.',
+    href: '/property-management/best-rent-collection-apps',
+    type: 'Roundup',
+  },
+];
+
+const comparisonContent = [
+  {
+    title: 'DoorLoop vs Buildium',
+    description: 'Two popular property management platforms compared head-to-head.',
+    href: '/property-management/doorloop-vs-buildium',
+  },
+  {
+    title: 'TurboTenant vs Avail',
+    description: 'Which free landlord software is right for you?',
+    href: '/property-management/turbotenant-vs-avail',
+  },
+];
+
+const reviewContent = [
+  { title: 'DoorLoop Review', href: '/property-management/reviews/doorloop' },
+  { title: 'TurboTenant Review', href: '/property-management/reviews/turbotenant' },
+  { title: 'Buildium Review', href: '/property-management/reviews/buildium' },
+  { title: 'Avail Review', href: '/property-management/reviews/avail' },
+];
+---
+
+<BaseLayout
+  title="Best Property Management Software"
+  description="Compare the best property management software for landlords and property managers. Honest reviews, head-to-head comparisons, and expert recommendations."
+>
+  <!-- Hero -->
+  <section class="bg-gradient-to-b from-blue-50 to-white py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="mb-6 text-sm">
+        <ol class="flex items-center gap-2 text-slate-500">
+          <li><a href="/" class="hover:text-slate-700">Home</a></li>
+          <li>/</li>
+          <li class="text-slate-900">Property Management</li>
+        </ol>
+      </nav>
+      
+      <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+        Property Management Software
+      </h1>
+      <p class="text-xl text-slate-600 max-w-3xl mb-8">
+        Find the right property management tools for your rental business. Whether you're a landlord with a few units or managing a large portfolio, we've tested the options and made honest recommendations.
+      </p>
+    </div>
+  </section>
+
+  <!-- Featured Roundups -->
+  <section class="py-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-slate-900 mb-6">Buying Guides</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        {featuredContent.map((item) => (
+          <a href={item.href} class="card group">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="badge badge-blue">{item.type}</span>
+              {item.badge && <span class="badge badge-green">{item.badge}</span>}
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
+              {item.title}
+            </h3>
+            <p class="text-slate-600 text-sm">{item.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparisons -->
+  <section class="py-12 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-slate-900 mb-6">Head-to-Head Comparisons</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        {comparisonContent.map((item) => (
+          <a href={item.href} class="card group flex items-center gap-4">
+            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                {item.title}
+              </h3>
+              <p class="text-slate-600 text-sm">{item.description}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Individual Reviews -->
+  <section class="py-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-slate-900 mb-6">Product Reviews</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {reviewContent.map((item) => (
+          <a href={item.href} class="p-4 border border-slate-200 rounded-lg hover:border-blue-300 hover:shadow-sm transition-all">
+            <span class="font-semibold text-slate-900 hover:text-blue-600">{item.title}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-12 bg-blue-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-2xl font-bold text-white mb-4">Not sure where to start?</h2>
+      <p class="text-blue-100 mb-6">
+        Our cornerstone guide compares all the top options in one place.
+      </p>
+      <a href="/property-management/best-property-management-software" class="inline-flex items-center px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-colors">
+        Read: Best Property Management Software 2026
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+    </div>
+  </section>
+</BaseLayout>
