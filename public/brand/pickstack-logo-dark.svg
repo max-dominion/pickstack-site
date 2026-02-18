@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 40" fill="none">
+  <!-- Icon: dark bg version -->
+  <rect x="0" y="26" width="24" height="7" rx="3.5" fill="#4A6FA5"/>
+  <rect x="0" y="16.5" width="30" height="7" rx="3.5" fill="#7BA3D0"/>
+  <!-- Top bar (the pick) — amber accent stays same -->
+  <rect x="0" y="7" width="36" height="7" rx="3.5" fill="#F0BC3C"/>
+
+  <!-- Wordmark: white on dark -->
+  <text x="46" y="28" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="700" font-size="22" fill="#FFFFFF" letter-spacing="-0.5">PickStack</text>
+  <text x="172" y="28" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="400" font-size="18" fill="#94B8D5">.ai</text>
+</svg>

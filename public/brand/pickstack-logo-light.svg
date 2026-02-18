@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 40" fill="none">
+  <!-- Icon: Stacked bars (stack symbol), top bar is the "pick" highlighted in amber -->
+  <!-- Bottom bar -->
+  <rect x="0" y="26" width="24" height="7" rx="3.5" fill="#6B8CAE"/>
+  <!-- Middle bar -->
+  <rect x="0" y="16.5" width="30" height="7" rx="3.5" fill="#1A3F6F"/>
+  <!-- Top bar (the pick) — amber accent -->
+  <rect x="0" y="7" width="36" height="7" rx="3.5" fill="#E8A820"/>
+
+  <!-- Wordmark: "PickStack" bold + ".ai" regular -->
+  <text x="46" y="28" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="700" font-size="22" fill="#0F2D56" letter-spacing="-0.5">PickStack</text>
+  <text x="172" y="28" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="400" font-size="18" fill="#6B8CAE">.ai</text>
+</svg>

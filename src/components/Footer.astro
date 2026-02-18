@@ -1,89 +1,68 @@
 ---
 const currentYear = new Date().getFullYear();
-
-const footerLinks = {
-  categories: [
-    { label: 'Property Management Software', href: '/property-management' },
-  ],
-  company: [
-    { label: 'About', href: '/about' },
-    { label: 'Methodology', href: '/methodology' },
-    { label: 'Contact', href: '/contact' },
-  ],
-  legal: [
-    { label: 'Privacy Policy', href: '/privacy' },
-    { label: 'Terms of Service', href: '/terms' },
-    { label: 'Affiliate Disclosure', href: '/affiliate-disclosure' },
-  ],
-};
 ---
 
-<footer class="bg-slate-900 text-slate-400 mt-16">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-      <!-- Brand -->
-      <div class="md:col-span-1">
-        <a href="/" class="flex items-center gap-2 mb-4">
-          <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-            </svg>
-          </div>
-          <span class="font-bold text-xl text-white">PickStack<span class="text-blue-500">.ai</span></span>
-        </a>
-        <p class="text-sm">
-          Stack the right tools. Pick what fits.
-        </p>
-      </div>
+<footer class="footer" role="contentinfo">
+  <div class="footer-grid">
 
-      <!-- Categories -->
-      <div>
-        <h3 class="font-semibold text-white mb-4">Categories</h3>
-        <ul class="space-y-2">
-          {footerLinks.categories.map((link) => (
-            <li>
-              <a href={link.href} class="text-sm hover:text-white transition-colors">
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <!-- Company -->
-      <div>
-        <h3 class="font-semibold text-white mb-4">Company</h3>
-        <ul class="space-y-2">
-          {footerLinks.company.map((link) => (
-            <li>
-              <a href={link.href} class="text-sm hover:text-white transition-colors">
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <!-- Legal -->
-      <div>
-        <h3 class="font-semibold text-white mb-4">Legal</h3>
-        <ul class="space-y-2">
-          {footerLinks.legal.map((link) => (
-            <li>
-              <a href={link.href} class="text-sm hover:text-white transition-colors">
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-
-    <div class="border-t border-slate-800 mt-8 pt-8 text-sm text-center">
-      <p>&copy; {currentYear} PickStack.ai. All rights reserved.</p>
-      <p class="mt-2 text-slate-500">
-        Some links on this site are affiliate links. We may earn a commission if you make a purchase.
+    <!-- Brand Column -->
+    <div class="footer-brand">
+      <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:4px">
+        <div style="display:flex;flex-direction:column;gap:3px">
+          <div style="height:5px;width:26px;background:#E8A820;border-radius:3px"></div>
+          <div style="height:5px;width:20px;background:#7BA3D0;border-radius:3px"></div>
+          <div style="height:5px;width:14px;background:#4A6FA5;border-radius:3px"></div>
+        </div>
+        <span style="color:white;font-size:17px;font-weight:700;letter-spacing:-0.02em">
+          PickStack<span style="color:#94B8D5;font-weight:400;font-size:14px">.ai</span>
+        </span>
+      </a>
+      <p>
+        We research and review property management software so small landlords can make confident decisions.
+        All recommendations are independent. Affiliate relationships are always disclosed.
       </p>
     </div>
+
+    <!-- Top Picks Column -->
+    <div class="footer-col">
+      <h4>Top Picks</h4>
+      <a href="/property-management#turbotenant">TurboTenant</a>
+      <a href="/property-management#stessa">Stessa</a>
+      <a href="/property-management#buildium">Buildium</a>
+      <a href="/property-management#avail">Avail</a>
+      <a href="/property-management#baselane">Baselane</a>
+    </div>
+
+    <!-- Compare Column -->
+    <div class="footer-col">
+      <h4>Compare</h4>
+      <a href="/property-management#comparison">All Tools Side-by-Side</a>
+      <a href="/property-management#buying-guide">Buying Guide</a>
+      <a href="/property-management#faq">FAQ</a>
+    </div>
+
+    <!-- About Column -->
+    <div class="footer-col">
+      <h4>About</h4>
+      <a href="/about">About PickStack.ai</a>
+      <a href="/methodology">Our Methodology</a>
+      <a href="/affiliate-disclosure">Affiliate Disclosure</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+    </div>
+
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="footer-bottom">
+    <p>
+      &copy; {currentYear} PickStack.ai &nbsp;·&nbsp;
+      <a href="/affiliate-disclosure">Affiliate Disclosure</a> &nbsp;·&nbsp;
+      <a href="/privacy">Privacy</a> &nbsp;·&nbsp;
+      <a href="/terms">Terms</a>
+    </p>
+    <p style="margin-top:6px; font-size:11px; color:rgba(255,255,255,0.25)">
+      Some links on this site are affiliate links. We may earn a commission if you click through and make a purchase, at no additional cost to you.
+    </p>
   </div>
 </footer>
