@@ -1,112 +1,159 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const categories = [
+const topPicks = [
   {
-    title: 'Property Management Software',
-    description: 'Compare the best property management tools for landlords and property managers.',
-    href: '/property-management',
-    icon: '🏠',
-    articles: [
-      'Best Property Management Software',
-      'Best Free Landlord Software',
-      'DoorLoop vs Buildium',
-    ],
+    rank: 1,
+    name: 'TurboTenant',
+    tagline: 'Best Overall',
+    badge: 'editor',
+    badgeLabel: "⭐ Editor's Pick",
+    rating: '4.7',
+    stars: '★★★★★',
+    desc: 'The most complete free property management platform. Covers landlord-tenant screening, online rent collection, lease tracking, and maintenance requests — all at no cost.',
+    features: ['Free core plan', 'Tenant screening', 'Rent collection', 'Maintenance requests'],
+    pricing: 'Free – $15/mo',
+    href: '/property-management#turbotenant',
+    featured: true,
   },
-  // Future verticals will be added here
+  {
+    rank: 2,
+    name: 'Stessa',
+    tagline: 'Best Free',
+    badge: 'free',
+    badgeLabel: 'Best Free Option',
+    rating: '4.5',
+    stars: '★★★★½',
+    desc: 'Built for investor-landlords who care about financials. Exceptional accounting, income/expense tracking, and tax prep — completely free for the essentials.',
+    features: ['Free accounting', 'Tax reporting', 'Income tracking', 'Portfolio dashboard'],
+    pricing: 'Free – $20/mo',
+    href: '/property-management#stessa',
+    featured: false,
+  },
+  {
+    rank: 3,
+    name: 'Buildium',
+    tagline: 'Best for Portfolios',
+    badge: 'portfolio',
+    badgeLabel: 'Best for Portfolios',
+    rating: '4.3',
+    stars: '★★★★☆',
+    desc: 'Full-featured platform for landlords managing 10+ units. Professional-grade tools including tenant portal, accounting, and owner reports.',
+    features: ['Full accounting', 'Tenant portal', 'Owner reports', 'Maintenance tracking'],
+    pricing: 'From $58/mo',
+    href: '/property-management#buildium',
+    featured: false,
+  },
+];
+
+const trustSignals = [
+  { icon: '🔍', label: '15+ tools reviewed', sub: 'Hands-on testing and research' },
+  { icon: '📅', label: 'Updated monthly', sub: 'Pricing and features stay current' },
+  { icon: '✅', label: 'Affiliate-disclosed', sub: 'We always say when we earn a cut' },
 ];
 ---
 
 <BaseLayout
-  title="PickStack.ai"
-  description="Stack the right tools. Pick what fits. Curated SaaS comparisons to help you choose the perfect software for your business."
+  title="PickStack.ai — Find the Right Property Management Software"
+  description="We research and compare 15+ property management tools so small landlords can make confident software decisions. Honest reviews, affiliate-disclosed."
 >
-  <!-- Hero -->
-  <section class="bg-gradient-to-b from-slate-50 to-white py-16 md:py-24">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6">
-        Stack the right tools.<br />
-        <span class="text-blue-600">Pick what fits.</span>
-      </h1>
-      <p class="text-xl text-slate-600 max-w-2xl mx-auto mb-8">
-        Curated SaaS comparisons for specific business types. No fluff, no paid placements — just honest research to help you choose.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/property-management" class="btn-primary">
-          Explore Property Management Software
-          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </a>
-        <a href="/methodology" class="btn-secondary">
-          Our Methodology
-        </a>
-      </div>
-    </div>
-  </section>
 
-  <!-- Categories -->
-  <section class="py-16">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">Software Categories</h2>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {categories.map((category) => (
-          <a href={category.href} class="card group">
-            <div class="text-4xl mb-4">{category.icon}</div>
-            <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
-              {category.title}
-            </h3>
-            <p class="text-slate-600 mb-4">{category.description}</p>
-            <ul class="text-sm text-slate-500 space-y-1">
-              {category.articles.map((article) => (
-                <li class="flex items-center gap-2">
-                  <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                  {article}
-                </li>
-              ))}
-            </ul>
-          </a>
+  <!-- Hero -->
+  <section style="background:white; padding: 72px 0 64px; border-bottom: 1px solid #E5E7EB;">
+    <div class="container-layout" style="text-align:center">
+      <div class="hero-eyebrow">Property Management Software Reviews</div>
+      <h1 class="display-headline" style="margin-bottom:20px">
+        Find the Right Tools for<br />Your Rental Business
+      </h1>
+      <p style="font-size:1.2rem; color:#4B5563; max-width:600px; margin:0 auto 36px; line-height:1.6;">
+        We've reviewed 15+ property management tools so small landlords can make confident software decisions — without the guesswork.
+      </p>
+      <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+        <a href="/property-management" class="btn-primary">See Our Top Picks →</a>
+        <a href="/methodology" class="btn-secondary">Our Methodology</a>
+      </div>
+      <!-- Trust bar -->
+      <div style="margin-top:40px; display:flex; gap:32px; justify-content:center; flex-wrap:wrap;">
+        {trustSignals.map((s) => (
+          <div style="display:flex; align-items:center; gap:8px; font-size:13px; color:#6B7280;">
+            <span style="font-size:16px">{s.icon}</span>
+            <span>{s.label}</span>
+          </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- How It Works -->
-  <section class="py-16 bg-slate-50">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-slate-900 mb-12 text-center">How We Pick</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="text-center">
-          <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">1</div>
-          <h3 class="font-bold text-lg mb-2">Research</h3>
-          <p class="text-slate-600">We test products, analyze features, read reviews, and compare pricing — so you don't have to.</p>
-        </div>
-        <div class="text-center">
-          <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">2</div>
-          <h3 class="font-bold text-lg mb-2">Compare</h3>
-          <p class="text-slate-600">Side-by-side comparisons focused on what matters for your specific use case and business type.</p>
-        </div>
-        <div class="text-center">
-          <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">3</div>
-          <h3 class="font-bold text-lg mb-2">Recommend</h3>
-          <p class="text-slate-600">Clear recommendations based on your needs — not who pays us the highest commission.</p>
-        </div>
+  <!-- Top 3 Picks -->
+  <section style="padding: 64px 0; background: #F9FAFB;">
+    <div class="container-layout">
+      <div style="text-align:center; margin-bottom:40px">
+        <p class="section-label">Our Recommendations</p>
+        <h2 style="font-size:1.75rem; font-weight:700; color:var(--color-primary); margin-top:8px;">Top Picks for Small Landlords</h2>
+      </div>
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:20px;">
+        {topPicks.map((tool) => (
+          <div class={`tool-card${tool.featured ? ' featured' : ''}`}>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+              <div class="tool-card-rank">#{tool.rank}</div>
+              <span class={`badge badge-${tool.badge === 'editor' ? 'pick' : tool.badge === 'free' ? 'free' : 'portfolio'}`}>
+                {tool.badgeLabel}
+              </span>
+            </div>
+            <div style="display:flex; align-items:baseline; justify-content:space-between; margin-bottom:4px;">
+              <div class="tool-card-name">{tool.name}</div>
+              <div class="tool-rating">
+                <span class="rating-stars-text">{tool.stars.slice(0,3)}</span>
+                <span class="rating-number">{tool.rating}</span>
+                <span class="rating-denom">/5</span>
+              </div>
+            </div>
+            <div class="tool-card-tagline">{tool.tagline}</div>
+            <p class="tool-card-desc">{tool.desc}</p>
+            <div class="tool-card-features">
+              {tool.features.map((f) => (
+                <div class="feature-check">{f}</div>
+              ))}
+            </div>
+            <div class="tool-card-footer">
+              <div class="tool-pricing">Pricing: <strong>{tool.pricing}</strong></div>
+              <div>
+                <a href={tool.href} class="btn-visit">See Details →</a>
+                <div class="affiliate-note">Affiliate Link</div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div style="text-align:center; margin-top:32px;">
+        <a href="/property-management" class="btn-secondary">View Full Roundup + Comparison Table</a>
       </div>
     </div>
   </section>
 
-  <!-- Trust signals -->
-  <section class="py-16">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl font-bold text-slate-900 mb-4">Why Trust PickStack?</h2>
-      <p class="text-slate-600 max-w-2xl mx-auto mb-8">
-        We're transparent about how we make money. Yes, we earn affiliate commissions — but our recommendations are based on merit, not payouts.
-      </p>
-      <a href="/methodology" class="text-blue-600 hover:text-blue-800 font-semibold">
-        Read our full methodology →
-      </a>
+  <!-- Why Trust Us -->
+  <section style="padding: 64px 0; background:white;">
+    <div class="container-layout">
+      <div style="text-align:center; margin-bottom:40px">
+        <p class="section-label">Why Trust PickStack</p>
+        <h2 style="font-size:1.75rem; font-weight:700; color:var(--color-primary); margin-top:8px;">How We Pick</h2>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:24px; max-width:900px; margin:0 auto;">
+        {trustSignals.map((s) => (
+          <div style="text-align:center; padding:28px 24px; border:1px solid #E5E7EB; border-radius:12px; background:#F9FAFB;">
+            <div style="font-size:2rem; margin-bottom:12px">{s.icon}</div>
+            <div style="font-size:15px; font-weight:700; color:var(--color-primary); margin-bottom:6px">{s.label}</div>
+            <div style="font-size:13px; color:#6B7280">{s.sub}</div>
+          </div>
+        ))}
+      </div>
+      <div style="text-align:center; margin-top:32px;">
+        <p style="font-size:14px; color:#6B7280; max-width:560px; margin:0 auto 16px;">
+          We're transparent about affiliate relationships. We earn commissions through some links — but our rankings are based on merit, not payout rates.
+        </p>
+        <a href="/methodology" style="font-size:14px; color:var(--color-link); font-weight:600;">Read our full methodology →</a>
+      </div>
     </div>
   </section>
+
 </BaseLayout>

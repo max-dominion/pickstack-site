@@ -29,9 +29,6 @@
   --max-width-layout: 1200px;
 }
 
-/* ---- Google Fonts ---- */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
 /* ---- CSS Custom Properties (fallback + component use) ---- */
 :root {
   --color-primary: #0F2D56;

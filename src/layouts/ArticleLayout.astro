@@ -46,49 +46,54 @@ function buildSchema() {
   author={data.author}
   schema={buildSchema()}
 >
-  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <!-- Breadcrumb -->
-    <nav class="mb-6 text-sm">
-      <ol class="flex items-center gap-2 text-slate-500">
-        <li><a href="/" class="hover:text-slate-700">Home</a></li>
-        <li>/</li>
-        {'vertical' in data && (
-          <>
-            <li><a href={`/${data.vertical}`} class="hover:text-slate-700 capitalize">{data.vertical.replace('-', ' ')}</a></li>
-            <li>/</li>
-          </>
-        )}
-        <li class="text-slate-900 truncate">{data.title}</li>
-      </ol>
-    </nav>
+  <!-- Article wrapper -->
+  <div style="background:white; min-height:60vh;">
+    <article style="max-width:780px; margin:0 auto; padding:40px 24px 64px;">
 
-    <!-- Header -->
-    <header class="mb-8">
-      <h1 class="text-4xl font-bold text-slate-900 mb-4">{data.title}</h1>
-      <p class="text-xl text-slate-600 mb-4">{data.description}</p>
-      <div class="flex items-center gap-4 text-sm text-slate-500">
-        <span>By {data.author}</span>
-        <span>•</span>
-        <time datetime={data.publishedAt.toISOString()}>
-          {data.publishedAt.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
-        </time>
-        {'updatedAt' in data && data.updatedAt && (
-          <>
-            <span>•</span>
-            <span>Updated {data.updatedAt.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
-          </>
-        )}
+      <!-- Breadcrumb -->
+      <nav style="margin-bottom:24px; font-size:13px;">
+        <ol style="display:flex; align-items:center; gap:8px; color:#6B7280; list-style:none; padding:0; margin:0; flex-wrap:wrap;">
+          <li><a href="/" style="color:var(--color-link); text-decoration:none;">Home</a></li>
+          <li style="color:#D1D5DB">/</li>
+          {'vertical' in data && (
+            <>
+              <li><a href={`/${data.vertical}`} style="color:var(--color-link); text-decoration:none; text-transform:capitalize;">{data.vertical.replace('-', ' ')}</a></li>
+              <li style="color:#D1D5DB">/</li>
+            </>
+          )}
+          <li style="color:#111827; font-weight:500;">{data.title}</li>
+        </ol>
+      </nav>
+
+      <!-- Header -->
+      <header style="margin-bottom:36px; padding-bottom:28px; border-bottom:1px solid #E5E7EB;">
+        <h1 style="font-size:2.25rem; font-weight:800; color:var(--color-primary); margin-bottom:14px; letter-spacing:-0.02em; line-height:1.2;">{data.title}</h1>
+        <p style="font-size:1.1rem; color:#4B5563; margin-bottom:16px; line-height:1.6;">{data.description}</p>
+        <div style="display:flex; align-items:center; gap:12px; font-size:13px; color:#9CA3AF; flex-wrap:wrap;">
+          <span>By {data.author}</span>
+          <span>·</span>
+          <time datetime={data.publishedAt.toISOString()}>
+            {data.publishedAt.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+          </time>
+          {'updatedAt' in data && data.updatedAt && (
+            <>
+              <span>·</span>
+              <span>Updated {data.updatedAt.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+            </>
+          )}
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="prose">
+        <slot />
       </div>
-    </header>
 
-    <!-- Content -->
-    <div class="prose">
-      <slot />
-    </div>
+      <!-- Affiliate disclosure -->
+      <aside style="margin-top:48px; padding:16px 20px; background:#F9FAFB; border:1px solid #E5E7EB; border-left:4px solid var(--color-primary-muted); border-radius:0 8px 8px 0; font-size:13px; color:#6B7280;">
+        <strong style="color:#374151;">Disclosure:</strong> Some links in this article are affiliate links. If you click and make a purchase, we may earn a commission at no extra cost to you. This helps support our research and editorial work. <a href="/methodology" style="color:var(--color-link);">Learn about our methodology →</a>
+      </aside>
 
-    <!-- Affiliate disclosure -->
-    <aside class="mt-12 p-4 bg-slate-50 rounded-lg text-sm text-slate-600">
-      <strong>Disclosure:</strong> Some links in this article are affiliate links. If you click and make a purchase, we may earn a commission at no extra cost to you. This helps support our research and editorial work.
-    </aside>
-  </article>
+    </article>
+  </div>
 </BaseLayout>

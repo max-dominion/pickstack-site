@@ -2,7 +2,6 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-// Get content for this vertical (will be empty initially)
 const roundups = await getCollection('roundups', ({ data }) => data.vertical === 'property-management');
 const reviews = await getCollection('reviews', ({ data }) => data.category === 'property-management');
 const comparisons = await getCollection('comparisons', ({ data }) => data.vertical === 'property-management');
@@ -10,7 +9,7 @@ const comparisons = await getCollection('comparisons', ({ data }) => data.vertic
 const featuredContent = [
   {
     title: 'Best Property Management Software for Small Landlords 2026',
-    description: 'Our top picks for landlords managing 1-50 units. Comprehensive comparison of features, pricing, and ease of use.',
+    description: 'Our top picks for landlords managing 1–50 units. Comprehensive comparison of features, pricing, and ease of use.',
     href: '/property-management/best-property-management-software',
     type: 'Roundup',
     badge: 'Featured',
@@ -20,12 +19,14 @@ const featuredContent = [
     description: 'The best no-cost options for landlords who need basic property management without breaking the bank.',
     href: '/property-management/best-free-landlord-software',
     type: 'Roundup',
+    badge: null,
   },
   {
     title: 'Best Rent Collection Apps 2026',
     description: 'Compare the top apps for collecting rent online, with ACH, credit card, and automatic payment options.',
     href: '/property-management/best-rent-collection-apps',
     type: 'Roundup',
+    badge: null,
   },
 ];
 
@@ -51,44 +52,51 @@ const reviewContent = [
 ---
 
 <BaseLayout
-  title="Best Property Management Software"
-  description="Compare the best property management software for landlords and property managers. Honest reviews, head-to-head comparisons, and expert recommendations."
+  title="Best Property Management Software 2026 — PickStack.ai"
+  description="Compare the best property management software for small landlords. Honest reviews, head-to-head comparisons, and expert recommendations — all affiliate-disclosed."
 >
   <!-- Hero -->
-  <section class="bg-gradient-to-b from-blue-50 to-white py-16">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <nav class="mb-6 text-sm">
-        <ol class="flex items-center gap-2 text-slate-500">
-          <li><a href="/" class="hover:text-slate-700">Home</a></li>
-          <li>/</li>
-          <li class="text-slate-900">Property Management</li>
+  <section style="background:white; padding:56px 0 48px; border-bottom:1px solid #E5E7EB;">
+    <div class="container-layout">
+      <!-- Breadcrumb -->
+      <nav style="margin-bottom:20px; font-size:13px;">
+        <ol style="display:flex; align-items:center; gap:8px; color:#6B7280; list-style:none; padding:0; margin:0;">
+          <li><a href="/" style="color:var(--color-link); text-decoration:none;">Home</a></li>
+          <li style="color:#D1D5DB">/</li>
+          <li style="color:#111827; font-weight:500">Property Management</li>
         </ol>
       </nav>
-      
-      <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+
+      <div class="hero-eyebrow" style="text-align:left; display:inline-block;">Software Reviews & Comparisons</div>
+      <h1 style="font-size:2.5rem; font-weight:800; color:var(--color-primary); margin:16px 0 16px; letter-spacing:-0.02em; line-height:1.15;">
         Property Management Software
       </h1>
-      <p class="text-xl text-slate-600 max-w-3xl mb-8">
-        Find the right property management tools for your rental business. Whether you're a landlord with a few units or managing a large portfolio, we've tested the options and made honest recommendations.
+      <p style="font-size:1.1rem; color:#4B5563; max-width:680px; line-height:1.65; margin-bottom:28px;">
+        Find the right property management tools for your rental business. We've tested the top options and made honest recommendations — whether you manage a few units or a large portfolio.
       </p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="/property-management/best-property-management-software" class="btn-primary">See Full Roundup →</a>
+        <a href="#comparison" class="btn-secondary">Compare All Tools</a>
+      </div>
     </div>
   </section>
 
-  <!-- Featured Roundups -->
-  <section class="py-12">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl font-bold text-slate-900 mb-6">Buying Guides</h2>
-      <div class="grid md:grid-cols-3 gap-6">
+  <!-- Buying Guides -->
+  <section style="padding:56px 0; background:#F9FAFB;">
+    <div class="container-layout">
+      <p class="section-label" style="margin-bottom:8px;">Buying Guides</p>
+      <h2 style="font-size:1.6rem; font-weight:700; color:var(--color-primary); margin-bottom:28px;">Roundups</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:18px;">
         {featuredContent.map((item) => (
-          <a href={item.href} class="card group">
-            <div class="flex items-center gap-2 mb-3">
-              <span class="badge badge-blue">{item.type}</span>
-              {item.badge && <span class="badge badge-green">{item.badge}</span>}
+          <a href={item.href} style="display:block; background:white; border:1px solid #E5E7EB; border-radius:12px; padding:20px; text-decoration:none; transition:box-shadow 0.2s, transform 0.2s;"
+            onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,0.09)'; this.style.transform='translateY(-2px)'"
+            onmouseout="this.style.boxShadow='none'; this.style.transform='none'">
+            <div style="display:flex; gap:6px; margin-bottom:10px; align-items:center;">
+              <span class="badge badge-value">{item.type}</span>
+              {item.badge && <span class="badge badge-pick">{item.badge}</span>}
             </div>
-            <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
-              {item.title}
-            </h3>
-            <p class="text-slate-600 text-sm">{item.description}</p>
+            <h3 style="font-size:15px; font-weight:700; color:var(--color-primary); margin:0 0 8px; line-height:1.4;">{item.title}</h3>
+            <p style="font-size:13px; color:#6B7280; margin:0; line-height:1.55;">{item.description}</p>
           </a>
         ))}
       </div>
@@ -96,22 +104,19 @@ const reviewContent = [
   </section>
 
   <!-- Comparisons -->
-  <section class="py-12 bg-slate-50">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl font-bold text-slate-900 mb-6">Head-to-Head Comparisons</h2>
-      <div class="grid md:grid-cols-2 gap-6">
+  <section style="padding:56px 0; background:white;">
+    <div class="container-layout">
+      <p class="section-label" style="margin-bottom:8px;">Head-to-Head</p>
+      <h2 id="comparison" style="font-size:1.6rem; font-weight:700; color:var(--color-primary); margin-bottom:28px;">Comparisons</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:18px;">
         {comparisonContent.map((item) => (
-          <a href={item.href} class="card group flex items-center gap-4">
-            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-              <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
-              </svg>
-            </div>
+          <a href={item.href} style="display:flex; align-items:center; gap:16px; background:white; border:1px solid #E5E7EB; border-radius:12px; padding:18px; text-decoration:none; transition:box-shadow 0.2s;"
+            onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,0.08)'"
+            onmouseout="this.style.boxShadow='none'">
+            <div style="width:44px; height:44px; background:var(--color-accent-light); border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:20px;">⚖️</div>
             <div>
-              <h3 class="font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
-                {item.title}
-              </h3>
-              <p class="text-slate-600 text-sm">{item.description}</p>
+              <div style="font-size:15px; font-weight:700; color:var(--color-primary); margin-bottom:4px;">{item.title}</div>
+              <div style="font-size:13px; color:#6B7280;">{item.description}</div>
             </div>
           </a>
         ))}
@@ -119,33 +124,34 @@ const reviewContent = [
     </div>
   </section>
 
-  <!-- Individual Reviews -->
-  <section class="py-12">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl font-bold text-slate-900 mb-6">Product Reviews</h2>
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+  <!-- Reviews -->
+  <section style="padding:56px 0; background:#F9FAFB;">
+    <div class="container-layout">
+      <p class="section-label" style="margin-bottom:8px;">Individual Reviews</p>
+      <h2 style="font-size:1.6rem; font-weight:700; color:var(--color-primary); margin-bottom:28px;">Product Reviews</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px;">
         {reviewContent.map((item) => (
-          <a href={item.href} class="p-4 border border-slate-200 rounded-lg hover:border-blue-300 hover:shadow-sm transition-all">
-            <span class="font-semibold text-slate-900 hover:text-blue-600">{item.title}</span>
+          <a href={item.href} style="display:block; background:white; border:1px solid #E5E7EB; border-radius:10px; padding:16px; text-decoration:none; font-size:14px; font-weight:600; color:var(--color-primary); transition:border-color 0.15s, box-shadow 0.15s;"
+            onmouseover="this.style.borderColor='var(--color-accent)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.07)'"
+            onmouseout="this.style.borderColor='#E5E7EB'; this.style.boxShadow='none'">
+            {item.title} →
           </a>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="py-12 bg-blue-600">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-2xl font-bold text-white mb-4">Not sure where to start?</h2>
-      <p class="text-blue-100 mb-6">
-        Our cornerstone guide compares all the top options in one place.
+  <!-- CTA Banner -->
+  <section style="background:var(--color-primary); padding:56px 0;">
+    <div class="container-layout" style="text-align:center;">
+      <h2 style="font-size:1.75rem; font-weight:700; color:white; margin-bottom:12px;">Not sure where to start?</h2>
+      <p style="color:rgba(255,255,255,0.7); font-size:1rem; margin-bottom:28px; max-width:480px; margin-left:auto; margin-right:auto;">
+        Our cornerstone guide compares all top options in one place — features, pricing, pros, cons.
       </p>
-      <a href="/property-management/best-property-management-software" class="inline-flex items-center px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-colors">
-        Read: Best Property Management Software 2026
-        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-        </svg>
+      <a href="/property-management/best-property-management-software" class="btn-primary">
+        Read: Best Property Management Software 2026 →
       </a>
     </div>
   </section>
+
 </BaseLayout>
