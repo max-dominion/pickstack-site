@@ -1,0 +1,71 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const allComparisons = await getCollection('comparisons');
+allComparisons.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
+
+const byNiche = allComparisons.reduce((acc: Record<string, typeof allComparisons>, entry) => {
+  const niche = entry.data.niche;
+  if (!acc[niche]) acc[niche] = [];
+  acc[niche].push(entry);
+  return acc;
+}, {});
+---
+
+<BaseLayout
+  title="Software Comparison Articles — PickStack.ai"
+  description="Head-to-head comparisons of popular software tools. Find out which platform is right for your business with our unbiased, affiliate-disclosed reviews."
+>
+  <section style="background:white; padding:56px 0 48px; border-bottom:1px solid #E5E7EB;">
+    <div class="container-layout">
+      <nav style="margin-bottom:20px; font-size:13px;">
+        <ol style="display:flex; align-items:center; gap:8px; color:#6B7280; list-style:none; padding:0; margin:0;">
+          <li><a href="/" style="color:var(--color-link); text-decoration:none;">Home</a></li>
+          <li style="color:#D1D5DB">/</li>
+          <li style="color:#111827; font-weight:500;">Comparisons</li>
+        </ol>
+      </nav>
+      <div class="hero-eyebrow" style="text-align:left; display:inline-block;">Head-to-Head</div>
+      <h1 style="font-size:2.5rem; font-weight:800; color:var(--color-primary); margin:16px 0 16px; letter-spacing:-0.02em; line-height:1.15;">
+        Software Comparisons
+      </h1>
+      <p style="font-size:1.1rem; color:#4B5563; max-width:640px; line-height:1.65; margin-bottom:0;">
+        Unbiased head-to-head comparisons of the top software tools in each category. Pick the right platform for your business.
+      </p>
+    </div>
+  </section>
+
+  <section style="padding:48px 0 72px; background:#F9FAFB;">
+    <div class="container-layout">
+      {Object.entries(byNiche).length === 0 ? (
+        <p style="color:#6B7280; text-align:center; padding:48px 0;">Comparison articles coming soon.</p>
+      ) : (
+        Object.entries(byNiche).map(([niche, entries]) => {
+          const nicheLabel = niche.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
+          return (
+            <div style="margin-bottom:48px;">
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;">
+                <h2 style="font-size:1.35rem; font-weight:700; color:var(--color-primary);">{nicheLabel}</h2>
+                <a href={`/${niche}`} style="font-size:13px; color:var(--color-link); font-weight:600;">Browse {nicheLabel} →</a>
+              </div>
+              <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:16px;">
+                {entries.map((entry: (typeof allComparisons)[0]) => (
+                  <a href={`/comparisons/${entry.slug}`} style="display:block; background:white; border:1px solid #E5E7EB; border-radius:10px; padding:20px 22px; text-decoration:none; transition:box-shadow 0.15s; hover:box-shadow:0 4px 12px rgba(0,0,0,0.08);">
+                    <div style="font-size:15px; font-weight:700; color:var(--color-primary); margin-bottom:6px; line-height:1.35;">{entry.data.title}</div>
+                    <p style="font-size:13px; color:#6B7280; margin:0 0 12px; line-height:1.5;">{entry.data.excerpt}</p>
+                    <div style="font-size:12px; color:#9CA3AF;">
+                      {entry.data.tools.map((t: {name: string}, i: number) => (
+                        <span>{i > 0 ? ' vs ' : ''}{t.name}</span>
+                      ))}
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          );
+        })
+      )}
+    </div>
+  </section>
+</BaseLayout>

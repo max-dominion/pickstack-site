@@ -1,0 +1,113 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const comparisons = await getCollection('comparisons');
+  return comparisons.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const { Content } = await entry.render();
+
+const nicheLabel = data.niche.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
+const nicheHref = `/${data.niche}`;
+
+const toolA = data.tools[0];
+const toolB = data.tools[1];
+---
+
+<BaseLayout
+  title={data.title + ' — PickStack.ai'}
+  description={data.excerpt}
+  ogType="article"
+  publishedAt={data.publishDate}
+  updatedAt={data.updatedAt}
+  author={data.author}
+>
+  <div style="background:white; min-height:60vh;">
+    <article style="max-width:820px; margin:0 auto; padding:40px 24px 72px;">
+
+      <!-- Breadcrumb -->
+      <nav style="margin-bottom:24px; font-size:13px;">
+        <ol style="display:flex; align-items:center; gap:8px; color:#6B7280; list-style:none; padding:0; margin:0; flex-wrap:wrap;">
+          <li><a href="/" style="color:var(--color-link); text-decoration:none;">Home</a></li>
+          <li style="color:#D1D5DB">/</li>
+          <li><a href="/comparisons" style="color:var(--color-link); text-decoration:none;">Comparisons</a></li>
+          <li style="color:#D1D5DB">/</li>
+          <li><a href={nicheHref} style="color:var(--color-link); text-decoration:none;">{nicheLabel}</a></li>
+          <li style="color:#D1D5DB">/</li>
+          <li style="color:#111827; font-weight:500;">{toolA.name} vs {toolB.name}</li>
+        </ol>
+      </nav>
+
+      <!-- Header -->
+      <header style="margin-bottom:32px; padding-bottom:28px; border-bottom:1px solid #E5E7EB;">
+        <div style="display:inline-block; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--color-primary-muted); background:#EFF6FF; padding:4px 10px; border-radius:4px; margin-bottom:14px;">
+          Head-to-Head Comparison · {nicheLabel}
+        </div>
+        <h1 style="font-size:2.25rem; font-weight:800; color:var(--color-primary); margin-bottom:14px; letter-spacing:-0.02em; line-height:1.2;">
+          {data.title}
+        </h1>
+        <p style="font-size:1.1rem; color:#4B5563; margin-bottom:16px; line-height:1.6;">{data.excerpt}</p>
+        <div style="display:flex; align-items:center; gap:12px; font-size:13px; color:#9CA3AF; flex-wrap:wrap;">
+          <span>By {data.author}</span>
+          <span>·</span>
+          <time datetime={data.publishDate.toISOString()}>
+            {data.publishDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+          </time>
+          {data.updatedAt && (
+            <>
+              <span>·</span>
+              <span>Updated {data.updatedAt.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+            </>
+          )}
+        </div>
+      </header>
+
+      <!-- Quick Verdict Banner -->
+      <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-left:4px solid #16A34A; border-radius:0 8px 8px 0; padding:18px 20px; margin-bottom:36px;">
+        <div style="font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#15803D; margin-bottom:6px;">⚡ Quick Verdict</div>
+        <p style="font-size:15px; color:#166534; margin:0; line-height:1.55;">{data.verdict}</p>
+      </div>
+
+      <!-- Tool Score Cards -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:40px;">
+        {data.tools.map((tool: typeof toolA, i: number) => (
+          <div style={`border:2px solid ${i === 0 ? 'var(--color-primary)' : '#E5E7EB'}; border-radius:12px; padding:24px; text-align:center; background:${i === 0 ? '#F8FAFC' : 'white'};`}>
+            {i === 0 && (
+              <div style="font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:var(--color-primary-muted); margin-bottom:8px;">⭐ Top Pick</div>
+            )}
+            <div style="font-size:1.35rem; font-weight:800; color:var(--color-primary); margin-bottom:4px;">{tool.name}</div>
+            {tool.bestFor && (
+              <div style="font-size:13px; color:#6B7280; margin-bottom:12px;">Best for: {tool.bestFor}</div>
+            )}
+            <div style="font-size:2rem; font-weight:900; color:var(--color-primary); margin-bottom:4px;">{tool.rating.toFixed(1)}</div>
+            <div style="font-size:12px; color:#9CA3AF; margin-bottom:16px;">out of 5</div>
+            {tool.affiliateUrl && (
+              <a href={tool.affiliateUrl} style="display:inline-block; background:var(--color-cta); color:var(--color-primary); font-size:13px; font-weight:700; padding:8px 18px; border-radius:6px; text-decoration:none;">
+                Try {tool.name} →
+              </a>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <!-- Article Content -->
+      <div class="prose">
+        <Content />
+      </div>
+
+      <!-- Affiliate Disclosure -->
+      <aside style="margin-top:48px; padding:16px 20px; background:#F9FAFB; border:1px solid #E5E7EB; border-left:4px solid var(--color-primary-muted); border-radius:0 8px 8px 0; font-size:13px; color:#6B7280;">
+        <strong style="color:#374151;">Disclosure:</strong> Some links in this article are affiliate links. If you click and make a purchase, we may earn a commission at no extra cost to you.
+        <a href="/methodology" style="color:var(--color-link);">Learn about our methodology →</a>
+      </aside>
+
+    </article>
+  </div>
+</BaseLayout>
