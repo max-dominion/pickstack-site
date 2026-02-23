@@ -1,0 +1,256 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const roundups = await getCollection('roundups', ({ data }) => data.vertical === 'hoa-management');
+const reviews = await getCollection('reviews', ({ data }) => data.category === 'hoa-management');
+const comparisons = await getCollection('comparisons', ({ data }) => data.vertical === 'hoa-management');
+
+const featuredContent = [
+  {
+    title: 'Best HOA Management Software 2026',
+    description: 'Compare board portals, accounting, and compliance tools in the best HOA management software.',
+    href: '/hoa-management/best-hoa-management-software',
+    type: 'Roundup',
+    badge: 'Featured',
+  },
+  {
+    title: 'HOA Accounting Software: Top Tools for Treasurers',
+    description: 'Shortlist the best HOA accounting software for clean books, assessments, and reporting.',
+    href: '/hoa-management/hoa-accounting-software',
+    type: 'Roundup',
+    badge: null,
+  },
+  {
+    title: 'State HOA Law Guides: Compliance Checklists by State',
+    description: 'Find state HOA law guides, disclosure rules, and governance checklists in one place.',
+    href: '/hoa-management/state-hoa-law-guides',
+    type: 'Roundup',
+    badge: null,
+  },
+];
+
+const topTools = [
+  {
+    rank: '1',
+    name: 'Buildium',
+    tagline: 'All-in-one HOA accounting and resident portal.',
+    description: 'A strong pick for associations that need full bookkeeping, portals, and compliance tracking.',
+    features: [
+      'HOA accounting & reporting',
+      'Resident & board portals',
+      'Violation tracking',
+      'Online payments & lockbox',
+    ],
+    pricing: 'Starting at $55/mo + per unit',
+    href: '/hoa-management/reviews/buildium',
+    badge: 'Best Overall',
+    featured: true,
+  },
+  {
+    rank: '2',
+    name: 'PayHOA',
+    tagline: 'Fast dues collection with open-book accounting.',
+    description: 'Built for boards that want easy collections, transparent ledgers, and member communication.',
+    features: [
+      'Online dues & assessments',
+      'Open books accounting',
+      'Automated late fees',
+      'Owner messaging portal',
+    ],
+    pricing: 'Starting at $49/mo',
+    href: '/hoa-management/reviews/payhoa',
+    badge: 'Best for Payments',
+    featured: false,
+  },
+  {
+    rank: '3',
+    name: 'AppFolio',
+    tagline: 'Enterprise-grade HOA and property operations.',
+    description: 'Ideal for management companies running multiple communities and complex workflows.',
+    features: [
+      'Portfolio-level automation',
+      'Mobile inspections',
+      'Maintenance workflows',
+      'Integrated payments',
+    ],
+    pricing: 'Custom pricing',
+    href: '/hoa-management/reviews/appfolio',
+    badge: 'Best for Portfolios',
+    featured: false,
+  },
+  {
+    rank: '4',
+    name: 'HOAStart',
+    tagline: 'Affordable toolkit for self-managed boards.',
+    description: 'Great for smaller associations that want simple portals, voting, and dues collection.',
+    features: [
+      'HOA website builder',
+      'Member directory & portal',
+      'Dues collection',
+      'Board voting tools',
+    ],
+    pricing: 'Starting at $29/mo',
+    href: '/hoa-management/reviews/hoastart',
+    badge: 'Best Budget',
+    featured: false,
+  },
+];
+
+const comparisonContent = [
+  {
+    title: 'Buildium vs AppFolio',
+    description: 'Two heavyweights compared for accounting, portals, and compliance.',
+    href: '/hoa-management/buildium-vs-appfolio',
+  },
+  {
+    title: 'PayHOA vs HOAStart',
+    description: 'Which platform fits self-managed boards and smaller associations?',
+    href: '/hoa-management/payhoa-vs-hoastart',
+  },
+];
+
+const reviewContent = [
+  { title: 'Buildium Review', href: '/hoa-management/reviews/buildium' },
+  { title: 'PayHOA Review', href: '/hoa-management/reviews/payhoa' },
+  { title: 'HOAStart Review', href: '/hoa-management/reviews/hoastart' },
+  { title: 'AppFolio Review', href: '/hoa-management/reviews/appfolio' },
+  { title: 'Wild Apricot Review', href: '/hoa-management/reviews/wild-apricot' },
+];
+---
+
+<BaseLayout
+  title="Best HOA Management Software 2026 — PickStack.ai"
+  description="Compare the best HOA management software, HOA accounting software, and state HOA law guides. Honest reviews, comparisons, and buying guides for HOA boards."
+>
+  <!-- Hero -->
+  <section style="background:white; padding:56px 0 48px; border-bottom:1px solid #E5E7EB;">
+    <div class="container-layout">
+      <!-- Breadcrumb -->
+      <nav style="margin-bottom:20px; font-size:13px;">
+        <ol style="display:flex; align-items:center; gap:8px; color:#6B7280; list-style:none; padding:0; margin:0;">
+          <li><a href="/" style="color:var(--color-link); text-decoration:none;">Home</a></li>
+          <li style="color:#D1D5DB">/</li>
+          <li style="color:#111827; font-weight:500">HOA Management</li>
+        </ol>
+      </nav>
+
+      <div class="hero-eyebrow" style="text-align:left; display:inline-block;">Software Reviews & Comparisons</div>
+      <h1 style="font-size:2.5rem; font-weight:800; color:var(--color-primary); margin:16px 0 16px; letter-spacing:-0.02em; line-height:1.15;">
+        HOA Board Management Software
+      </h1>
+      <p style="font-size:1.1rem; color:#4B5563; max-width:680px; line-height:1.65; margin-bottom:28px;">
+        Compare the best HOA management software for board members and professional managers. We cover HOA accounting software, resident portals, and state HOA law guides so you can run a compliant, transparent community.
+      </p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="/hoa-management/best-hoa-management-software" class="btn-primary">See Full Roundup →</a>
+        <a href="#comparison" class="btn-secondary">Compare All Tools</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Buying Guides -->
+  <section style="padding:56px 0; background:#F9FAFB;">
+    <div class="container-layout">
+      <p class="section-label" style="margin-bottom:8px;">Buying Guides</p>
+      <h2 style="font-size:1.6rem; font-weight:700; color:var(--color-primary); margin-bottom:28px;">Roundups</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:18px;">
+        {featuredContent.map((item) => (
+          <a href={item.href} style="display:block; background:white; border:1px solid #E5E7EB; border-radius:12px; padding:20px; text-decoration:none; transition:box-shadow 0.2s, transform 0.2s;"
+            onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,0.09)'; this.style.transform='translateY(-2px)'"
+            onmouseout="this.style.boxShadow='none'; this.style.transform='none'">
+            <div style="display:flex; gap:6px; margin-bottom:10px; align-items:center;">
+              <span class="badge badge-value">{item.type}</span>
+              {item.badge && <span class="badge badge-pick">{item.badge}</span>}
+            </div>
+            <h3 style="font-size:15px; font-weight:700; color:var(--color-primary); margin:0 0 8px; line-height:1.4;">{item.title}</h3>
+            <p style="font-size:13px; color:#6B7280; margin:0; line-height:1.55;">{item.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Top Tools -->
+  <section style="padding:56px 0; background:white;">
+    <div class="container-layout">
+      <p class="section-label" style="margin-bottom:8px;">Top Tools</p>
+      <h2 style="font-size:1.6rem; font-weight:700; color:var(--color-primary); margin-bottom:28px;">Best HOA Management Software</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:18px;">
+        {topTools.map((tool) => (
+          <div class:list={['tool-card', tool.featured && 'featured']} id={tool.name.toLowerCase().replace(/\s+/g, '-')}
+          >
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+              <div class="tool-card-rank">{tool.rank}</div>
+              {tool.badge && <span class="badge badge-pick">{tool.badge}</span>}
+            </div>
+            <div class="tool-card-name">{tool.name}</div>
+            <div class="tool-card-tagline">{tool.tagline}</div>
+            <p class="tool-card-desc">{tool.description}</p>
+            <div class="tool-card-features">
+              {tool.features.map((feature) => (
+                <div class="feature-check">{feature}</div>
+              ))}
+            </div>
+            <div class="tool-card-footer">
+              <div class="tool-pricing"><strong>{tool.pricing}</strong></div>
+              <a href={tool.href} class="btn-visit">See Details</a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparisons -->
+  <section style="padding:56px 0; background:white;">
+    <div class="container-layout">
+      <p class="section-label" style="margin-bottom:8px;">Head-to-Head</p>
+      <h2 id="comparison" style="font-size:1.6rem; font-weight:700; color:var(--color-primary); margin-bottom:28px;">Comparisons</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:18px;">
+        {comparisonContent.map((item) => (
+          <a href={item.href} style="display:flex; align-items:center; gap:16px; background:white; border:1px solid #E5E7EB; border-radius:12px; padding:18px; text-decoration:none; transition:box-shadow 0.2s;"
+            onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,0.08)'"
+            onmouseout="this.style.boxShadow='none'">
+            <div style="width:44px; height:44px; background:var(--color-accent-light); border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:20px;">⚖️</div>
+            <div>
+              <div style="font-size:15px; font-weight:700; color:var(--color-primary); margin-bottom:4px;">{item.title}</div>
+              <div style="font-size:13px; color:#6B7280;">{item.description}</div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section style="padding:56px 0; background:#F9FAFB;">
+    <div class="container-layout">
+      <p class="section-label" style="margin-bottom:8px;">Individual Reviews</p>
+      <h2 id="reviews" style="font-size:1.6rem; font-weight:700; color:var(--color-primary); margin-bottom:28px;">Product Reviews</h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px;">
+        {reviewContent.map((item) => (
+          <a href={item.href} style="display:block; background:white; border:1px solid #E5E7EB; border-radius:10px; padding:16px; text-decoration:none; font-size:14px; font-weight:600; color:var(--color-primary); transition:border-color 0.15s, box-shadow 0.15s;"
+            onmouseover="this.style.borderColor='var(--color-accent)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.07)'"
+            onmouseout="this.style.borderColor='#E5E7EB'; this.style.boxShadow='none'">
+            {item.title} →
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section style="background:var(--color-primary); padding:56px 0;">
+    <div class="container-layout" style="text-align:center;">
+      <h2 style="font-size:1.75rem; font-weight:700; color:white; margin-bottom:12px;">Not sure where to start?</h2>
+      <p style="color:rgba(255,255,255,0.7); font-size:1rem; margin-bottom:28px; max-width:480px; margin-left:auto; margin-right:auto;">
+        Our cornerstone guide compares the top HOA platforms in one place — features, pricing, and compliance tools.
+      </p>
+      <a href="/hoa-management/best-hoa-management-software" class="btn-primary">
+        Read: Best HOA Management Software 2026 →
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>
