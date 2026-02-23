@@ -27,6 +27,14 @@ jobs:
       - run: npm run build
         env:
           GITHUB_PAGES: 'true'
+      # Rewrite hardcoded absolute links to include the base path
+      # Astro prefixes its own asset paths (/_astro/) but not hrefs in component templates
+      - name: Fix internal links for GitHub Pages base path
+        run: |
+          find dist -name '*.html' -exec perl -pi -e '
+            s|href="/(?!pickstack-site/)|href="/pickstack-site/|g;
+            s|src="/(?!pickstack-site/)|src="/pickstack-site/|g;
+          ' {} \;
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
