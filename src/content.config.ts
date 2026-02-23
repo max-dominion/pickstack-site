@@ -44,7 +44,49 @@ const comparisons = defineCollection({
   }),
 });
 
+// Pricing schema - "[Tool] Pricing 2026" pages (high commercial intent)
+const pricing = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    tool: z.string(),                     // e.g. "TurboTenant"
+    toolSlug: z.string(),                 // e.g. "turbotenant"
+    niche: z.string(),                    // e.g. "property-management"
+    excerpt: z.string(),
+    affiliateUrl: z.string().optional(),
+    publishDate: z.coerce.date(),
+    lastUpdated: z.coerce.date().optional(),
+    author: z.string().default('PickStack Team'),
+    featured: z.boolean().default(false),
+  }),
+});
+
+// Alternatives schema - "Best [Tool] Alternatives 2026" pages (captures switching intent)
+const alternatives = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    tool: z.string(),                     // The tool being replaced, e.g. "Buildium"
+    toolSlug: z.string(),                 // e.g. "buildium"
+    niche: z.string(),                    // e.g. "property-management"
+    excerpt: z.string(),
+    alternatives: z.array(z.object({
+      name: z.string(),
+      slug: z.string(),
+      bestFor: z.string(),
+      rating: z.number().min(1).max(5),
+      affiliateUrl: z.string().optional(),
+    })),
+    publishDate: z.coerce.date(),
+    updatedAt: z.coerce.date().optional(),
+    author: z.string().default('PickStack Team'),
+    featured: z.boolean().default(false),
+  }),
+});
+
 export const collections = {
   roundups,
   comparisons,
+  pricing,
+  alternatives,
 };
