@@ -3,32 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
 const roundups = await getCollection('roundups', ({ data }) => data.vertical === 'salon-management');
-const reviews = await getCollection('reviews', ({ data }) => data.category === 'salon-management');
-const comparisons = await getCollection('comparisons', ({ data }) => data.vertical === 'salon-management');
-
-const featuredContent = [
-  {
-    title: 'Best Salon Software for Small Business 2026',
-    description: 'Our top picks for independent salons and growing studios, with pricing and booking tools compared.',
-    href: '/salon-management/best-salon-software',
-    type: 'Roundup',
-    badge: 'Featured',
-  },
-  {
-    title: 'Salon Booking Software Comparison: Vagaro vs GlossGenius vs Fresha',
-    description: 'A side-by-side salon booking software comparison for pricing, marketplace reach, and client experience.',
-    href: '/salon-management/salon-booking-software-comparison',
-    type: 'Roundup',
-    badge: null,
-  },
-  {
-    title: 'Best Spa Management Software for Growing Studios',
-    description: 'Compare scheduling, memberships, and POS tools built for spa and multi-service teams.',
-    href: '/salon-management/best-spa-management-software',
-    type: 'Roundup',
-    badge: null,
-  },
-];
+const comparisons = await getCollection('comparisons', ({ data }) => data.niche === 'salon-management');
 
 const topTools = [
   {
@@ -43,7 +18,7 @@ const topTools = [
       'Inventory tracking',
     ],
     pricing: 'Starting at $59/mo per location',
-    href: '/salon-management/reviews/insight-salon',
+    href: '/comparisons/vagaro-vs-fresha',
     badge: 'Best Overall',
     featured: true,
   },
@@ -59,7 +34,7 @@ const topTools = [
       'Payroll & reports',
     ],
     pricing: 'Starting at $30/mo',
-    href: '/salon-management/reviews/vagaro',
+    href: '/comparisons/vagaro-vs-fresha',
     badge: 'Best for Discovery',
     featured: false,
   },
@@ -75,7 +50,7 @@ const topTools = [
       'Client intake forms',
     ],
     pricing: 'Starting at $24/mo + 2.6%',
-    href: '/salon-management/reviews/glossgenius',
+    href: '#glossgenius',
     badge: 'Best for Solo Pros',
     featured: false,
   },
@@ -91,7 +66,7 @@ const topTools = [
       'Two-way messaging',
     ],
     pricing: 'Custom pricing',
-    href: '/salon-management/reviews/boulevard',
+    href: '#boulevard',
     badge: 'Best for Teams',
     featured: false,
   },
@@ -105,15 +80,6 @@ const comparisonContent = [
   },
 ];
 
-const reviewContent = [
-  { title: 'Insight Salon Review', href: '/salon-management/reviews/insight-salon' },
-  { title: 'Vagaro Review', href: '/salon-management/reviews/vagaro' },
-  { title: 'GlossGenius Review', href: '/salon-management/reviews/glossgenius' },
-  { title: 'Boulevard Review', href: '/salon-management/reviews/boulevard' },
-  { title: 'Fresha Review', href: '/salon-management/reviews/fresha' },
-  { title: 'Mangomint Review', href: '/salon-management/reviews/mangomint' },
-  { title: 'Mindbody Review', href: '/salon-management/reviews/mindbody' },
-];
 ---
 
 <BaseLayout
@@ -140,30 +106,8 @@ const reviewContent = [
         Compare the best salon software for small business owners. Our salon booking software comparison highlights pricing, client experience, and the tools that help you grow appointments and retention.
       </p>
       <div style="display:flex; gap:12px; flex-wrap:wrap;">
-        <a href="/salon-management/best-salon-software" class="btn-primary">See Full Roundup →</a>
+        <a href="#top-tools" class="btn-primary">See Top Tools →</a>
         <a href="#comparison" class="btn-secondary">Compare All Tools</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Buying Guides -->
-  <section style="padding:56px 0; background:#F9FAFB;">
-    <div class="container-layout">
-      <p class="section-label" style="margin-bottom:8px;">Buying Guides</p>
-      <h2 style="font-size:1.6rem; font-weight:700; color:var(--color-primary); margin-bottom:28px;">Roundups</h2>
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:18px;">
-        {featuredContent.map((item) => (
-          <a href={item.href} style="display:block; background:white; border:1px solid #E5E7EB; border-radius:12px; padding:20px; text-decoration:none; transition:box-shadow 0.2s, transform 0.2s;"
-            onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,0.09)'; this.style.transform='translateY(-2px)'"
-            onmouseout="this.style.boxShadow='none'; this.style.transform='none'">
-            <div style="display:flex; gap:6px; margin-bottom:10px; align-items:center;">
-              <span class="badge badge-value">{item.type}</span>
-              {item.badge && <span class="badge badge-pick">{item.badge}</span>}
-            </div>
-            <h3 style="font-size:15px; font-weight:700; color:var(--color-primary); margin:0 0 8px; line-height:1.4;">{item.title}</h3>
-            <p style="font-size:13px; color:#6B7280; margin:0; line-height:1.55;">{item.description}</p>
-          </a>
-        ))}
       </div>
     </div>
   </section>
@@ -172,7 +116,7 @@ const reviewContent = [
   <section style="padding:56px 0; background:white;">
     <div class="container-layout">
       <p class="section-label" style="margin-bottom:8px;">Top Tools</p>
-      <h2 style="font-size:1.6rem; font-weight:700; color:var(--color-primary); margin-bottom:28px;">Best Salon &amp; Spa Platforms</h2>
+      <h2 id="top-tools" style="font-size:1.6rem; font-weight:700; color:var(--color-primary); margin-bottom:28px;">Best Salon &amp; Spa Platforms</h2>
       <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:18px;">
         {topTools.map((tool) => (
           <div class:list={['tool-card', tool.featured && 'featured']} id={tool.name.toLowerCase().replace(/\s+/g, '-')}
@@ -220,32 +164,15 @@ const reviewContent = [
     </div>
   </section>
 
-  <!-- Reviews -->
-  <section style="padding:56px 0; background:#F9FAFB;">
-    <div class="container-layout">
-      <p class="section-label" style="margin-bottom:8px;">Individual Reviews</p>
-      <h2 id="reviews" style="font-size:1.6rem; font-weight:700; color:var(--color-primary); margin-bottom:28px;">Product Reviews</h2>
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px;">
-        {reviewContent.map((item) => (
-          <a href={item.href} style="display:block; background:white; border:1px solid #E5E7EB; border-radius:10px; padding:16px; text-decoration:none; font-size:14px; font-weight:600; color:var(--color-primary); transition:border-color 0.15s, box-shadow 0.15s;"
-            onmouseover="this.style.borderColor='var(--color-accent)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.07)'"
-            onmouseout="this.style.borderColor='#E5E7EB'; this.style.boxShadow='none'">
-            {item.title} →
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
-
   <!-- CTA Banner -->
   <section style="background:var(--color-primary); padding:56px 0;">
     <div class="container-layout" style="text-align:center;">
       <h2 style="font-size:1.75rem; font-weight:700; color:white; margin-bottom:12px;">Not sure where to start?</h2>
       <p style="color:rgba(255,255,255,0.7); font-size:1rem; margin-bottom:28px; max-width:480px; margin-left:auto; margin-right:auto;">
-        Our cornerstone guide compares the best salon platforms in one place — booking, POS, memberships, and marketing.
+        Our head-to-head comparisons break down exactly how each salon platform stacks up — booking, POS, memberships, and pricing.
       </p>
-      <a href="/salon-management/best-salon-software" class="btn-primary">
-        Read: Best Salon Software 2026 →
+      <a href="#comparison" class="btn-primary">
+        Browse Comparisons →
       </a>
     </div>
   </section>

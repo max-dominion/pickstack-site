@@ -3,32 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
 const roundups = await getCollection('roundups', ({ data }) => data.vertical === 'property-management');
-const reviews = await getCollection('reviews', ({ data }) => data.category === 'property-management');
-const comparisons = await getCollection('comparisons', ({ data }) => data.vertical === 'property-management');
-
-const featuredContent = [
-  {
-    title: 'Best Property Management Software for Small Landlords 2026',
-    description: 'Our top picks for landlords managing 1–50 units. Comprehensive comparison of features, pricing, and ease of use.',
-    href: '/property-management/best-property-management-software',
-    type: 'Roundup',
-    badge: 'Featured',
-  },
-  {
-    title: 'Best Free Landlord Software 2026',
-    description: 'The best no-cost options for landlords who need basic property management without breaking the bank.',
-    href: '/property-management/best-free-landlord-software',
-    type: 'Roundup',
-    badge: null,
-  },
-  {
-    title: 'Best Rent Collection Apps 2026',
-    description: 'Compare the top apps for collecting rent online, with ACH, credit card, and automatic payment options.',
-    href: '/property-management/best-rent-collection-apps',
-    type: 'Roundup',
-    badge: null,
-  },
-];
+const comparisons = await getCollection('comparisons', ({ data }) => data.niche === 'property-management');
 
 const comparisonContent = [
   {
@@ -62,13 +37,6 @@ const comparisonContent = [
     href: '/comparisons/buildium-vs-appfolio',
   },
 ];
-
-const reviewContent = [
-  { title: 'DoorLoop Review', href: '/property-management/reviews/doorloop' },
-  { title: 'TurboTenant Review', href: '/property-management/reviews/turbotenant' },
-  { title: 'Buildium Review', href: '/property-management/reviews/buildium' },
-  { title: 'Avail Review', href: '/property-management/reviews/avail' },
-];
 ---
 
 <BaseLayout
@@ -95,30 +63,42 @@ const reviewContent = [
         Find the right property management tools for your rental business. We've tested the top options and made honest recommendations — whether you manage a few units or a large portfolio.
       </p>
       <div style="display:flex; gap:12px; flex-wrap:wrap;">
-        <a href="/property-management/best-property-management-software" class="btn-primary">See Full Roundup →</a>
+        <a href="#tools" class="btn-primary">See Top Tools →</a>
         <a href="#comparison" class="btn-secondary">Compare All Tools</a>
       </div>
     </div>
   </section>
 
-  <!-- Buying Guides -->
+  <!-- Top Tools Quick Overview -->
   <section style="padding:56px 0; background:#F9FAFB;">
     <div class="container-layout">
-      <p class="section-label" style="margin-bottom:8px;">Buying Guides</p>
-      <h2 style="font-size:1.6rem; font-weight:700; color:var(--color-primary); margin-bottom:28px;">Roundups</h2>
+      <p class="section-label" style="margin-bottom:8px;">Our Top Picks</p>
+      <h2 id="tools" style="font-size:1.6rem; font-weight:700; color:var(--color-primary); margin-bottom:28px;">Best Property Management Software 2026</h2>
       <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:18px;">
-        {featuredContent.map((item) => (
-          <a href={item.href} style="display:block; background:white; border:1px solid #E5E7EB; border-radius:12px; padding:20px; text-decoration:none; transition:box-shadow 0.2s, transform 0.2s;"
-            onmouseover="this.style.boxShadow='0 4px 16px rgba(0,0,0,0.09)'; this.style.transform='translateY(-2px)'"
-            onmouseout="this.style.boxShadow='none'; this.style.transform='none'">
-            <div style="display:flex; gap:6px; margin-bottom:10px; align-items:center;">
-              <span class="badge badge-value">{item.type}</span>
-              {item.badge && <span class="badge badge-pick">{item.badge}</span>}
-            </div>
-            <h3 style="font-size:15px; font-weight:700; color:var(--color-primary); margin:0 0 8px; line-height:1.4;">{item.title}</h3>
-            <p style="font-size:13px; color:#6B7280; margin:0; line-height:1.55;">{item.description}</p>
-          </a>
-        ))}
+        <div style="background:white; border:1px solid #E5E7EB; border-radius:12px; padding:20px; border-left:4px solid var(--color-accent);">
+          <div style="display:flex; gap:6px; margin-bottom:10px; align-items:center;">
+            <span class="badge badge-pick">Best Free</span>
+          </div>
+          <h3 style="font-size:15px; font-weight:700; color:var(--color-primary); margin:0 0 8px; line-height:1.4;">TurboTenant</h3>
+          <p style="font-size:13px; color:#6B7280; margin:0; line-height:1.55;">100% free for landlords. Covers listings, applications, screening, lease signing, and rent collection. Best for landlords with 1–10 units.</p>
+          <a href="/comparisons/turbotenant-vs-avail" style="display:inline-block; margin-top:12px; font-size:13px; color:var(--color-link); text-decoration:none; font-weight:600;">Compare with Avail →</a>
+        </div>
+        <div style="background:white; border:1px solid #E5E7EB; border-radius:12px; padding:20px; border-left:4px solid var(--color-accent);">
+          <div style="display:flex; gap:6px; margin-bottom:10px; align-items:center;">
+            <span class="badge badge-pick">Best for Investors</span>
+          </div>
+          <h3 style="font-size:15px; font-weight:700; color:var(--color-primary); margin:0 0 8px; line-height:1.4;">Stessa</h3>
+          <p style="font-size:13px; color:#6B7280; margin:0; line-height:1.55;">Automated financial tracking, tax-ready reports, and portfolio dashboards. Free tier available. Best for landlords focused on ROI tracking.</p>
+          <a href="/comparisons/stessa-vs-baselane" style="display:inline-block; margin-top:12px; font-size:13px; color:var(--color-link); text-decoration:none; font-weight:600;">Compare with Baselane →</a>
+        </div>
+        <div style="background:white; border:1px solid #E5E7EB; border-radius:12px; padding:20px; border-left:4px solid var(--color-accent);">
+          <div style="display:flex; gap:6px; margin-bottom:10px; align-items:center;">
+            <span class="badge badge-pick">Best Banking</span>
+          </div>
+          <h3 style="font-size:15px; font-weight:700; color:var(--color-primary); margin:0 0 8px; line-height:1.4;">Baselane</h3>
+          <p style="font-size:13px; color:#6B7280; margin:0; line-height:1.55;">Landlord banking + property management in one. Dedicated accounts, automated bookkeeping, and rent collection. Free for landlords.</p>
+          <a href="/comparisons/stessa-vs-baselane" style="display:inline-block; margin-top:12px; font-size:13px; color:var(--color-link); text-decoration:none; font-weight:600;">Compare with Stessa →</a>
+        </div>
       </div>
     </div>
   </section>
@@ -144,32 +124,15 @@ const reviewContent = [
     </div>
   </section>
 
-  <!-- Reviews -->
-  <section style="padding:56px 0; background:#F9FAFB;">
-    <div class="container-layout">
-      <p class="section-label" style="margin-bottom:8px;">Individual Reviews</p>
-      <h2 style="font-size:1.6rem; font-weight:700; color:var(--color-primary); margin-bottom:28px;">Product Reviews</h2>
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px;">
-        {reviewContent.map((item) => (
-          <a href={item.href} style="display:block; background:white; border:1px solid #E5E7EB; border-radius:10px; padding:16px; text-decoration:none; font-size:14px; font-weight:600; color:var(--color-primary); transition:border-color 0.15s, box-shadow 0.15s;"
-            onmouseover="this.style.borderColor='var(--color-accent)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.07)'"
-            onmouseout="this.style.borderColor='#E5E7EB'; this.style.boxShadow='none'">
-            {item.title} →
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
-
   <!-- CTA Banner -->
   <section style="background:var(--color-primary); padding:56px 0;">
     <div class="container-layout" style="text-align:center;">
       <h2 style="font-size:1.75rem; font-weight:700; color:white; margin-bottom:12px;">Not sure where to start?</h2>
       <p style="color:rgba(255,255,255,0.7); font-size:1rem; margin-bottom:28px; max-width:480px; margin-left:auto; margin-right:auto;">
-        Our cornerstone guide compares all top options in one place — features, pricing, pros, cons.
+        Our head-to-head comparisons break down exactly how each tool stacks up — features, pricing, and who it's best for.
       </p>
-      <a href="/property-management/best-property-management-software" class="btn-primary">
-        Read: Best Property Management Software 2026 →
+      <a href="#comparison" class="btn-primary">
+        Browse Comparisons →
       </a>
     </div>
   </section>

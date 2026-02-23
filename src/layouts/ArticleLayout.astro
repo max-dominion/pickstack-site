@@ -2,37 +2,17 @@
 import BaseLayout from './BaseLayout.astro';
 import type { CollectionEntry } from 'astro:content';
 
-type ArticleType = CollectionEntry<'reviews'> | CollectionEntry<'roundups'> | CollectionEntry<'comparisons'>;
+type ArticleType = CollectionEntry<'roundups'> | CollectionEntry<'comparisons'>;
 
 interface Props {
   article: ArticleType;
-  type: 'review' | 'roundup' | 'comparison';
+  type: 'roundup' | 'comparison';
 }
 
 const { article, type } = Astro.props;
 const { data } = article;
 
-// Build schema based on article type
 function buildSchema() {
-  if (type === 'review') {
-    const reviewData = data as CollectionEntry<'reviews'>['data'];
-    return {
-      type: 'Review' as const,
-      data: {
-        itemReviewed: {
-          '@type': 'SoftwareApplication',
-          name: reviewData.product,
-          applicationCategory: reviewData.category,
-        },
-        reviewRating: {
-          '@type': 'Rating',
-          ratingValue: reviewData.rating,
-          bestRating: 5,
-          worstRating: 1,
-        },
-      },
-    };
-  }
   return { type: 'Article' as const };
 }
 ---

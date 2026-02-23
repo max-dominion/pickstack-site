@@ -1,25 +1,5 @@
 import { defineCollection, z } from 'astro:content';
 
-// Review schema - individual product reviews
-const reviews = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    product: z.string(),
-    category: z.string(),
-    rating: z.number().min(1).max(5),
-    pros: z.array(z.string()),
-    cons: z.array(z.string()),
-    pricing: z.string(),
-    affiliateUrl: z.string().optional(),
-    publishedAt: z.coerce.date(),
-    updatedAt: z.coerce.date().optional(),
-    featured: z.boolean().default(false),
-    author: z.string().default('PickStack Team'),
-  }),
-});
-
 // Roundup schema - "Best X for Y" articles
 const roundups = defineCollection({
   type: 'content',
@@ -64,18 +44,7 @@ const comparisons = defineCollection({
   }),
 });
 
-// Static pages
-const pages = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-  }),
-});
-
 export const collections = {
-  reviews,
   roundups,
   comparisons,
-  pages,
 };
